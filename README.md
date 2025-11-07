@@ -29,3 +29,20 @@
 2. Gmail API/IMAP連携を設定し、ラベルやフィルタで案件メールを仕分け。
 3. メール解析PoC（LLM＋ルールベース）を作成し、魅力度スコアと投稿文生成を確立。
 4. 投稿キューとスケジューラを実装し、X API連携で自動投稿を実現。
+
+## Yahooメール疎通スクリプト
+
+- ルート直下の `.env` に `ID`（または `MAIL_ADDRESS`）、`MAIL_ADDRESS`、`PASSWORD` を設定する。必要に応じて `IMAP_HOST/PORT` や `SMTP_HOST/PORT` でホスト情報を上書きできる。
+- IMAPで最新メールの概要を取得する:
+
+  ```bash
+  python3 mail_client.py fetch --folder INBOX --limit 5
+  ```
+
+- SMTPでテストメールを送信する:
+
+  ```bash
+  python3 mail_client.py send-test --to your@example.com
+  ```
+
+  `--to` を省略すると `.env` の `MAIL_ADDRESS` 宛に送信される。
